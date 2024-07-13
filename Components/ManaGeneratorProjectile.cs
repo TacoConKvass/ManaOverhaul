@@ -1,4 +1,5 @@
-using Terraria.ModLoader;
+using ManaOverhaul.DataStructures;
+using Terraria;
 
 namespace ManaOverhaul.Components
 

@@ -1,6 +1,8 @@
 using ManaOverhaul.DataStructures;
 using Terraria;
 
+namespace ManaOverhaul.Components;
+
 public class ManaGeneratorItem : ItemComponent {
 	public struct ManaGenerationData {
 	 	public Range Variation { get; set; } = new();
