@@ -5,8 +5,10 @@ namespace ManaOverhaul.Components;
 
 public class OnHitManaGeneratorItem : ItemComponent {
 	public record struct OnHitManaGenerationData {
+		public OnHitManaGenerationData() { }
+		
 		public Range Variation { get; set; } = new();
-		public int BaseManaGeneration { get; set }
+		public int BaseManaGeneration { get; set } = 0;
 		public int ManaGeneration => BaseManaGeneration * (Variation.Upper == Variation.Lower ? 1f : Variation.Random);
 	}
 	 
