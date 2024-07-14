@@ -7,16 +7,7 @@ public class ChangeScaleWithManaItem : ItemComponent {
 		public ChangeScaleWithManaData() { }
 		
 		public float[] Thresholds { get; set; } = [0f];
-		public float Threshold { 
-			get => Thresholds[0];
-			set => Thresholds[0] = value;
-		}
-		
 		public float[] ScaleBoosts { get; set; } = [0f];
-		public float ScaleBoost { 
-			get => ScaleBoosts[0];
-			set => ScaleBoosts[0] = value;
-		}
 	}
 	
 	ChangeScaleWithManaData Data = new();
