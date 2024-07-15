@@ -1,4 +1,9 @@
+using Humanizer;
+using ManaOverhaul.DataStructures;
+using System.Collections.Generic;
 using Terraria;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace ManaOverhaul.Components;
 
@@ -34,6 +39,23 @@ public class ChangeScaleWithManaItem : ItemComponent {
 			if (player.statMana < player.statManaMax2 * Data.Thresholds[index]) {
 				scale += Data.ScaleBoosts[index];
 			}
+		}
+	}
+
+	public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
+		if (!Enabled) {
+			return;
+		}
+
+		for (int index = 0; index < Data.Thresholds.Length; index++) {
+			tooltips.Add(new TooltipLine(
+				Mod,
+				"changeScaleWithMana",
+				Language.GetTextValue("Mods.ManaOverhaul.ChangeScaleWithMana").FormatWith(
+					(int)(Data.ScaleBoosts[index] * 100),
+					(int)(Data.Thresholds[index] * 100)
+				)
+			));
 		}
 	}
 }
