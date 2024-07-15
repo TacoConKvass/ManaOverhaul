@@ -6,8 +6,8 @@ public class ChangeScaleWithManaItem : ItemComponent {
 	/// <summary>
 	/// Data for changing scale on mana thresholds
 	/// </summary>
-	public record struct ChangeScaleWithManaData {
-		public ChangeScaleWithManaData() { }
+	public record struct ComponentData {
+		public ComponentData() { }
 		
 		/// <summary>
 		/// Thresholds for changing item scale
@@ -22,8 +22,8 @@ public class ChangeScaleWithManaItem : ItemComponent {
 		public float[] ScaleBoosts { get; set; } = [0f];
 	}
 	
-	/// <inheritdoc cref="ChangeScaleWithManaData"/>
-	public ChangeScaleWithManaData Data = new();
+	/// <inheritdoc cref="ComponentData"/>
+	public ComponentData Data = new();
 	
 	public override void ModifyItemScale(Item item, Player player, ref float scale) {
 		if (!Enabled) {

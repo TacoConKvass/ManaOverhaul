@@ -7,8 +7,8 @@ public class OnHitManaGeneratorItem : ItemComponent {
 	/// <summary>
 	/// Data for on hit mana regeneration
 	/// </summary>
-	public record struct OnHitManaGenerationData {
-		public OnHitManaGenerationData() { }
+	public record struct ComponentData {
+		public ComponentData() { }
 		
 		/// <summary>
 		/// Determines the variation range of amount of mana regenerated
@@ -24,8 +24,8 @@ public class OnHitManaGeneratorItem : ItemComponent {
 		public int ManaGeneration => (int)(BaseManaGeneration * (Variation.Upper == Variation.Lower ? 1f : Variation.Random));
 	}
 	 
-	/// <inheritdoc cref="OnHitManaGenerationData"/>
-	public OnHitManaGenerationData Data = new();
+	/// <inheritdoc cref="ComponentData"/>
+	public ComponentData Data = new();
 	 
 	public override void OnHitNPC(Item item, Player player, NPC target, NPC.HitInfo hit, int damageDone) {
 		if (!Enabled) {
