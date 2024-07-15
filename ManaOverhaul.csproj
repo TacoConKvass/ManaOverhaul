@@ -10,7 +10,7 @@
 
 	<!-- References -->
 	<ItemGroup>
-		
+	  <AdditionalFiles Include="Prefabs\ItemData.prefab" />
 	</ItemGroup>
 
 </Project>
