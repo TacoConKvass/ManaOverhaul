@@ -1,3 +1,4 @@
+using ManaOverhaul.DataStructures;
 using MonoMod.RuntimeDetour;
 using System;
 using System.Reflection;
@@ -34,5 +35,6 @@ public class ManaOverhaul : Mod {
 	public void OnUnload() {
 		UpdateManaRegenHook.Undo();
 		SpawnManaStarHook.Undo();
+		ComponentDataLibrary.Unload();
 	}
 }
