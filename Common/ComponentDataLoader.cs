@@ -14,7 +14,6 @@ public class ComponentDataLoader : ModSystem {
 
 	public static void LoadAmbienceTracksFromMod(Mod mod) {
 		var assets = mod.GetFileNames();
-		mod.Logger.Warn(assets.Count);
 
 		foreach (string fullFilePath in assets.Where(t => t.EndsWith(".prefab"))) {
 			using Stream stream = mod.GetFileStream(fullFilePath);
@@ -26,7 +25,6 @@ public class ComponentDataLoader : ModSystem {
 
 			foreach (JToken rootToken in json) {
 				if (rootToken is not JProperty { Name: string entityName, Value: JObject entityJson }) {
-					mod.Logger.Warn(rootToken.Path.Split(".").Last());
 					continue;
 				}
 
