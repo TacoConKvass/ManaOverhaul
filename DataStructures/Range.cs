@@ -1,6 +1,12 @@
+using Terraria;
+
 namespace ManaOverhaul.DataStructures;
 
+/// <summary>
+/// An object representing a range of values
+/// </summary>
 public record struct Range {
+	public Range() { }
 	/// <summary> 
 	/// Bottom limit of the range, inclusive
 	/// </summary> 

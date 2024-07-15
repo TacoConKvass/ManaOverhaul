@@ -1,27 +1,28 @@
 using ManaOverhaul.DataStructures;
 using Terraria;
 
-namespace ManaOverhaul.Components
+namespace ManaOverhaul.Components;
 
 public class OnHitManaGeneratorProjectile : ProjectileComponent {
-	/// <summary
+	/// <summary>
 	/// Data for on hit mana regeneration
 	/// </summary>
-	public record struct OnHitManaGenerationData {
+	public record struct OnHitManaGenerationData
+	{
 		public OnHitManaGenerationData() { }
 		
-		/// <summary
+		/// <summary>
 		/// Determines the variation range of amount of mana regenerated
 		/// </summary>
 		public Range Variation { get; set; } = new();
-		/// <summary
+		/// <summary>
 		/// Base amount of mana regenerated
 		/// </summary>
-		public int BaseManaGeneration { get; set } = 0;
-		/// <summary
+		public int BaseManaGeneration { get; set; } = 0;
+		/// <summary>
 		/// The amount of mana the hot will actually generate
 		/// </summary>
-		public int ManaGeneration => BaseManaGeneration * (Variation.Upper == Variation.Lower ? 1f : Variation.Random);
+		public int ManaGeneration => (int)(BaseManaGeneration * (Variation.Upper == Variation.Lower ? 1f : Variation.Random));
 	}
 	 
 	/// <inheritdoc cref="OnHitManaGenerationData"/>
