@@ -10,7 +10,7 @@ public class OnHitManaGeneratorProjectile : ProjectileComponent {
 	public record struct OnHitManaGenerationData
 	{
 		public OnHitManaGenerationData() { }
-		
+
 		/// <summary>
 		/// Determines the variation range of amount of mana regenerated
 		/// </summary>
@@ -24,15 +24,15 @@ public class OnHitManaGeneratorProjectile : ProjectileComponent {
 		/// </summary>
 		public int ManaGeneration => (int)(BaseManaGeneration * (Variation.Upper == Variation.Lower ? 1f : Variation.Random));
 	}
-	 
+
 	/// <inheritdoc cref="OnHitManaGenerationData"/>
-	 public OnHitManaGenerationData Data = new();
+	public OnHitManaGenerationData Data = new();
 	 
 	 public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone) {
 	 	if (!Enabled) {
 	 		return;
 	 	}
 	 	
-	 	Main.player[projectile.owner].healMana(Data.ManaGeneration);
+	 	Main.player[projectile.owner].statMana += Data.ManaGeneration;
 	 }
 }

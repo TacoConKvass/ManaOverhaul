@@ -25,13 +25,13 @@ public class ChangeScaleWithManaItem : ItemComponent {
 	/// <inheritdoc cref="ChangeScaleWithManaData"/>
 	public ChangeScaleWithManaData Data = new();
 	
-	public override ModifyItemScale(Item item, Player player, ref float scale) {
+	public override void ModifyItemScale(Item item, Player player, ref float scale) {
 		if (!Enabled) {
 			return;
 		}
-		
-		foreach (int index = 0; index < Data.Thresholds.Length) {
-			if (player.mana < player.statMana * Data.Thresholds[index]) {
+
+		for (int index = 0; index < Data.Thresholds.Length; index++) {
+			if (player.statMana < player.statManaMax2 * Data.Thresholds[index]) {
 				scale += Data.ScaleBoosts[index];
 			}
 		}

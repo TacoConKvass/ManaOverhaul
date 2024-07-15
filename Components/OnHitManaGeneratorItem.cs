@@ -31,7 +31,7 @@ public class OnHitManaGeneratorItem : ItemComponent {
 		if (!Enabled) {
 	 		return;
 	 	}
-	 	
-	 	player.healMana(Data.ManaGeneration);
+
+		player.statMana += Data.ManaGeneration;	
 	}
 }
