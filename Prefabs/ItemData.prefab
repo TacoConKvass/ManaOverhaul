@@ -1,4 +1,4 @@
-24: {
+WoodenSword: {
     ChangeScaleWithManaItem : {
         Thresholds : [2]
         ScaleBoosts: [5]

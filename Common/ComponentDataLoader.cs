@@ -30,21 +30,21 @@ public class ComponentDataLoader : ModSystem {
 
 				if (entityJson["ChangeScaleWithManaItem"] is JObject ChangeScaleWithManaItemJson) {
 					ComponentDataLibrary.ChangeScaleWithManaItem.Add(
-						int.Parse(entityName), 
+						ItemID.Search.GetId(entityName),
 						ChangeScaleWithManaItemJson.ToObject<ChangeScaleWithManaItem.ComponentData>()
 					);
 				}
 
 				if (entityJson["OnHitManaGeneratorItem"] is JObject OnHitManaGeneratorItemJson) {
 					ComponentDataLibrary.OnHitManaGeneratorItem.Add(
-						int.Parse(entityName),
+						ItemID.Search.GetId(entityName),
 						OnHitManaGeneratorItemJson.ToObject<OnHitManaGeneratorItem.ComponentData>()
 					);
 				}
 
 				if (entityJson["OnHitManaGeneratorProjectile"] is JObject OnHitManaGeneratorProjectileJson) {
 					ComponentDataLibrary.OnHitManaGeneratorProjectile.Add(
-						int.Parse(entityName),
+						ItemID.Search.GetId(entityName),
 						OnHitManaGeneratorProjectileJson.ToObject<OnHitManaGeneratorProjectile.ComponentData>()
 					);
 				}
