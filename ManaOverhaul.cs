@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 
 namespace ManaOverhaul;
 
-public class ManaOverhaul : Mod {
+public partial class ManaOverhaul : Mod {
 	public Hook UpdateManaRegenHook = new Hook(
 		typeof(Player).GetMethod("UpdateManaRegen", BindingFlags.Public | BindingFlags.Instance),
 		(Action<Player> orig, Player self) => {

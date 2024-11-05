@@ -3,19 +3,20 @@ using ManaOverhaul.DataStructures;
 using ManaOverhaul.Components;
 using System.IO;
 using System.Linq;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace ManaOverhaul.Utils;
 
 public class ComponentDataLoader : ModSystem {
 	public override void Load() {
-		LoadAmbienceTracksFromMod(Mod);
+		LoadPrefabsFromMod(Mod);
 	}
 
-	public static void LoadAmbienceTracksFromMod(Mod mod) {
+	public static void LoadPrefabsFromMod(Mod mod) {
 		var assets = mod.GetFileNames();
 
-		foreach (string fullFilePath in assets.Where(t => t.EndsWith(".prefab"))) {
+		foreach (string fullFilePath in assets.Where(t => t.EndsWith(".mana-overhaul"))) {
 			using Stream stream = mod.GetFileStream(fullFilePath);
 			using StreamReader streamReader = new StreamReader(stream);
 
@@ -44,7 +45,7 @@ public class ComponentDataLoader : ModSystem {
 
 				if (entityJson["OnHitManaGeneratorProjectile"] is JObject OnHitManaGeneratorProjectileJson) {
 					ComponentDataLibrary.OnHitManaGeneratorProjectile.Add(
-						ItemID.Search.GetId(entityName),
+						ProjectileID.Search.GetId(entityName),
 						OnHitManaGeneratorProjectileJson.ToObject<OnHitManaGeneratorProjectile.ComponentData>()
 					);
 				}

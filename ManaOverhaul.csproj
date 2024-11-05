@@ -7,10 +7,10 @@
 	<PropertyGroup>
 		
 	</PropertyGroup>
+	<ItemGroup>
+	  <AdditionalFiles Include="Prefabs\ItemData.mana-overhaul" />
+	</ItemGroup>
 
 	<!-- References -->
-	<ItemGroup>
-	  <AdditionalFiles Include="Prefabs\ItemData.prefab" />
-	</ItemGroup>
 
 </Project>
