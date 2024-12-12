@@ -5,10 +5,11 @@ using System.IO;
 using System.Linq;
 using Terraria.ID;
 using Terraria.ModLoader;
+using System.Collections.Generic;
 
 namespace ManaOverhaul.Utils;
 
-public class ComponentDataLoader : ModSystem {
+public class PrefabLoader : ModSystem {
 	public override void Load() {
 		LoadPrefabsFromMod(Mod);
 	}
