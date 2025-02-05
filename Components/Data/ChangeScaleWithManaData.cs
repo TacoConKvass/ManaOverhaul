@@ -1,3 +1,9 @@
+using ManaOverhaul.Common;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using Terraria;
+using Terraria.ID;
+
 namespace ManaOverhaul.Components;
 
 /// <summary>
@@ -21,4 +27,16 @@ public class ChangeScaleWithManaData() {
 		Thresholds = [.5f], 
 		ScaleBoosts = [.3f]
 	};
+
+	public static void DeserializeFor<T>(int ID, JObject data) {
+		Dictionary<int, ChangeScaleWithManaData> dictionary = [];
+
+		if (typeof(T) == typeof(Item)) dictionary = ComponentLibrary.Item.ChangeScaleWithMana;
+		if (typeof(T) == typeof(Projectile)) dictionary = ComponentLibrary.Projectile.ChangeScaleWithMana;
+
+		ChangeScaleWithManaData value = data.ToObject<ChangeScaleWithManaData>();
+
+		if (dictionary.TryAdd(ID, value)) return;
+		else dictionary[ID] = value;
+	}
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using Terraria.ID;
 using Terraria.ModLoader;
 using System;
+using Terraria;
 
 namespace ManaOverhaul.Utils;
 
@@ -28,33 +29,43 @@ public class PrefabLoader : ModSystem {
 
 			if (json["Items"] is JContainer items) {
 				foreach (JToken itemToken in items) {
-					if (itemToken is not JProperty { Name: string itemName, Value: JObject components}) {
+					if (itemToken is not JProperty { Name: string itemName, Value: JObject components }) {
 						continue;
 					}
 
-					if (components["ChangeScaleWithMana"] is	JObject data) {
-						int ID = ItemID.Search.GetId(itemName);
-						ChangeScaleWithManaData value = data.ToObject<ChangeScaleWithManaData>();
+					if (components["ChangeScaleWithMana"] is JObject changeScaleWithManaData) 
+						ChangeScaleWithManaData.DeserializeFor<Item>(ItemID.Search.GetId(itemName), changeScaleWithManaData);
 
-						if (ComponentLibrary.Item.ChangeScaleWithMana.TryAdd(ID, value)) continue;
-						else ComponentLibrary.Item.ChangeScaleWithMana[ID] = value;
-					}
+					if (components["AppliesManaDrain"] is JObject appliesManaDrainData) 
+						ManaDrainData.DeserializeFor<Item>(ItemID.Search.GetId(itemName), appliesManaDrainData);
 				}
 			}
-			
+
 			if (json["Projectiles"] is JContainer projectiles) {
 				foreach (JToken projectileToken in projectiles) {
-					if (projectileToken is not JProperty { Name: string projectilesName, Value: JObject components }) {
+					if (projectileToken is not JProperty { Name: string projectileName, Value: JObject components }) {
 						continue;
 					}
 
-					if (components["ChangeScaleWithMana"] is JObject data) {
-						int ID = ProjectileID.Search.GetId(projectilesName);
-						ChangeScaleWithManaData value = data.ToObject<ChangeScaleWithManaData>();
+					if (components["ChangeScaleWithMana"] is JObject changeScaleWithManaData) 
+						ChangeScaleWithManaData.DeserializeFor<Projectile>(ProjectileID.Search.GetId(projectileName), changeScaleWithManaData);
 
-						if (ComponentLibrary.Projectile.ChangeScaleWithMana.TryAdd(ID, value)) continue;
-						else ComponentLibrary.Projectile.ChangeScaleWithMana[ID] = value;
+					if (components["AppliesManaDrain"] is JObject appliesManaDrainData) 
+						ManaDrainData.DeserializeFor<Projectile>(ProjectileID.Search.GetId(projectileName), appliesManaDrainData);
+				}
+			}
+
+			if (json["NPCs"] is JContainer npcs) {
+				foreach (JToken npcToken in npcs) {
+					if (npcToken is not JProperty { Name: string npcName, Value: JObject components }) {
+						continue;
 					}
+
+					if (components["AppliesManaDrain"] is JObject appliesManaDrainData) 
+						ManaDrainData.DeserializeFor<NPC>(NPCID.Search.GetId(npcName), appliesManaDrainData);
+
+					if (components["Resists"] is JObject resistances)
+						Resistance.DeserializeFor<NPC>(NPCID.Search.GetId(npcName), resistances);
 				}
 			}
 		}
