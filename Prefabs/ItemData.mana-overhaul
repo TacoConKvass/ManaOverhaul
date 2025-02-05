@@ -1,6 +1,8 @@
-WoodenSword: {
-    ChangeScaleWithManaItem : {
-        Thresholds : [2]
-        ScaleBoosts: [5]
-    }
+Items: {
+	WoodenSword: {
+		ChangeScaleWithMana : {
+			Thresholds : [2]
+			ScaleBoosts: [5]
+		}
+	}
 }
