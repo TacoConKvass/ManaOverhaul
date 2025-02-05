@@ -1,5 +1,6 @@
 using Humanizer;
 using ManaOverhaul.Common;
+using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Localization;
@@ -12,7 +13,10 @@ public class ChangeScaleWithManaItem : ItemComponent {
 	public ChangeScaleWithManaData Data = default;
 
 	public override void SetDefaults(Item entity) {
-		if (ComponentLibrary.Item.ChangeScaleWithMana.TryGetValue(entity.type, out var value)) Data = value;
+		if (ComponentLibrary.Item.ChangeScaleWithMana.TryGetValue(entity.type, out var value)) {
+			Data = value;
+			Console.WriteLine(value);
+		}
 		else if (entity.CountsAsClass(DamageClass.Melee) && !entity.noMelee && entity.pick == 0) Data = ChangeScaleWithManaData.Default;
 
 		Enabled = Data != null;

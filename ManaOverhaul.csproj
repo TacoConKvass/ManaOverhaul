@@ -5,7 +5,7 @@
 
 	<!-- General -->
 	<ItemGroup>
-	  <AdditionalFiles Include="Prefabs\ItemData.mana-overhaul" />
+	  <AdditionalFiles Include="Prefabs\PreHardmode.mana-overhaul" />
 	</ItemGroup>
 
 	<!-- References -->
