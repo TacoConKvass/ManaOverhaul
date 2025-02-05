@@ -13,6 +13,11 @@ public static class ComponentLibrary {
 		public static Dictionary<int, ChangeScaleWithManaData> ChangeScaleWithMana = [];
 		public static Dictionary<int, ManaDrainData> AppliesManaDrain = [];
 	}
+	public static class NPC
+	{
+		public static Dictionary<int, Resistance> Resistance = [];
+		public static Dictionary<int, ManaDrainData> AppliesManaDrain = [];
+	}
 
 	public static void Unload() {
 		Item.ChangeScaleWithMana = null;
