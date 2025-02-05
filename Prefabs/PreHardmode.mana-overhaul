@@ -34,6 +34,11 @@ Items: {
 			Thresholds: [0.3, 0.4]
 			ScaleBoosts: [0.26, 0.34]
 		}
+		AppliesManaDrain: {
+			Ticks: 10
+            ManaPerInterval: 1
+            Interval: 1
+		}
 	}
 	BladeofGrass: {
 		ChangeScaleWithMana: { 
@@ -111,6 +116,15 @@ Items: {
 		ChangeScaleWithMana: { 
 			Thresholds: [0.3, 0.4]
 			ScaleBoosts: [0.25, 0.36]
+		}
+	}
+}
+Projectiles: {
+    NightsEdge: {
+		AppliesManaDrain: {
+			Ticks: 10
+            ManaPerInterval: 1
+            Interval: 1
 		}
 	}
 }
