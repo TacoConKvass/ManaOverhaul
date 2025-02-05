@@ -1,5 +1,5 @@
 using Humanizer;
-using ManaOverhaul.DataStructures;
+using ManaOverhaul.Common;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.Localization;
@@ -8,28 +8,16 @@ using Terraria.ModLoader;
 namespace ManaOverhaul.Components;
 
 public class ChangeScaleWithManaItem : ItemComponent {
-	/// <summary>
-	/// Data for changing scale on mana thresholds
-	/// </summary>
-	public record struct ComponentData {
-		public ComponentData() { }
-		
-		/// <summary>
-		/// Thresholds for changing item scale
-		/// </summary>
-		public float[] Thresholds { get; set; } = [0f];
-		/// <summary>
-		/// Items scale boosts activated at thresholds at thier index
-		/// </summary>
-		/// <remarks>
-		/// The boosts are additive with eachother
-		/// </remarks>
-		public float[] ScaleBoosts { get; set; } = [0f];
+	/// <inheritdoc cref="ChangeScaleWithManaData"/>
+	public ChangeScaleWithManaData Data = default;
+
+	public override void SetDefaults(Item entity) {
+		if (ComponentLibrary.Item.ChangeScaleWithMana.TryGetValue(entity.type, out var value)) Data = value;
+		else if (entity.CountsAsClass(DamageClass.Melee) && !entity.noMelee && entity.pick == 0) Data = ChangeScaleWithManaData.Default;
+
+		Enabled = Data != null;
 	}
-	
-	/// <inheritdoc cref="ComponentData"/>
-	public ComponentData Data = new();
-	
+
 	public override void ModifyItemScale(Item item, Player player, ref float scale) {
 		if (!Enabled) {
 			return;
@@ -50,7 +38,7 @@ public class ChangeScaleWithManaItem : ItemComponent {
 		for (int index = 0; index < Data.Thresholds.Length; index++) {
 			tooltips.Add(new TooltipLine(
 				Mod,
-				"changeScaleWithMana",
+				"ChangeScaleWithMana",
 				Language.GetTextValue("Mods.ManaOverhaul.ChangeScaleWithMana").FormatWith(
 					(int)(Data.ScaleBoosts[index] * 100),
 					(int)(Data.Thresholds[index] * 100)
