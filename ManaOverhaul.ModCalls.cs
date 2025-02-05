@@ -22,8 +22,8 @@ public partial class ManaOverhaul {
 	internal bool LoadPrefabs(object[] args) {
 		if (args[0] is not Mod mod) throw new ArgumentException("Second argument of call 'LoadPrefabs' must be your a mod object");
 		
-		ComponentDataLoader.LoadPrefabsFromMod(mod);
+		PrefabLoader.LoadPrefabsFromMod(mod);
 
 		return true;
-	}
+	}	
 }

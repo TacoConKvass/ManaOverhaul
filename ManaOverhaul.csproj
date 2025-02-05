@@ -4,14 +4,10 @@
 	<Import Project="..\tModLoader.targets" />
 
 	<!-- General -->
-	<PropertyGroup>
-		
-	</PropertyGroup>
-    
 	<ItemGroup>
 	  <AdditionalFiles Include="Prefabs\ItemData.mana-overhaul" />
 	</ItemGroup>
 
 	<!-- References -->
-
+	
 </Project>

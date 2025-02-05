@@ -1,4 +1,4 @@
-using ManaOverhaul.DataStructures;
+using ManaOverhaul.Common;
 using MonoMod.RuntimeDetour;
 using System;
 using System.Reflection;
@@ -9,11 +9,21 @@ using Terraria.ModLoader;
 namespace ManaOverhaul;
 
 public partial class ManaOverhaul : Mod {
+	public void OnLoad() {
+		Console.WriteLine("Guh");
+		UpdateManaRegenHook.Apply();
+		SpawnManaStarHook.Apply();
+	}
+
+	public void OnUnload() {
+		UpdateManaRegenHook.Undo();
+		SpawnManaStarHook.Undo();
+		ComponentLibrary.Unload();
+	}
+
 	public Hook UpdateManaRegenHook = new Hook(
 		typeof(Player).GetMethod("UpdateManaRegen", BindingFlags.Public | BindingFlags.Instance),
-		(Action<Player> orig, Player self) => {
-			return;
-		}
+		(Action<Player> orig, Player self) => { }
 	);
 
 	public Hook SpawnManaStarHook = new Hook(
@@ -26,15 +36,4 @@ public partial class ManaOverhaul : Mod {
 			return orig(source, X, Y, Width, Height, itemToClone, Type, Stack, noBroadcast, pfix, noGrabDelay, reverseLookup);
 		}
 	);
-
-	public void OnLoad() {
-		UpdateManaRegenHook.Apply();
-		SpawnManaStarHook.Apply();
-	}
-
-	public void OnUnload() {
-		UpdateManaRegenHook.Undo();
-		SpawnManaStarHook.Undo();
-		ComponentDataLibrary.Unload();
-	}
 }
