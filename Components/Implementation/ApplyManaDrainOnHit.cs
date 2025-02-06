@@ -14,6 +14,7 @@ public class ApplyManaDrainOnHit_Item : ItemComponent {
 	
 	public override void SetDefaults(Item entity) {
 		if (ComponentLibrary.Item.AppliesManaDrain.TryGetValue(entity.type, out var value)) Data = value;
+		else if (entity.CountsAsClass(DamageClass.Melee) && entity.pick == 0 && entity.ModItem == null && !entity.noMelee) Data = ManaDrainData.Default(entity);
 
 		Enabled = Data != null;
 	}

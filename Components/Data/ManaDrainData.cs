@@ -1,5 +1,6 @@
 using ManaOverhaul.Common;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using Terraria;
 
@@ -20,6 +21,12 @@ public class ManaDrainData() {
 	/// How much mana per interval is regained
 	/// </summary>
 	public int ManaPerInterval { get; set; }
+
+	public static ManaDrainData Default(Item item) => new ManaDrainData() {
+		Interval = 10,
+		ManaPerInterval = 3 * (Math.Abs(item.rare) + 1) / 2,
+		Ticks = 10 
+	};
 
 	public static void DeserializeFor<T>(int ID, JObject data) {
 		Dictionary<int, ManaDrainData> dictionary = [];

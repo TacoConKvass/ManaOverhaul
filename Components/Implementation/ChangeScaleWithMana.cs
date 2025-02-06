@@ -13,7 +13,7 @@ public class ChangeScaleWithMana_Item : ItemComponent {
 
 	public override void SetDefaults(Item entity) {
 		if (ComponentLibrary.Item.ChangeScaleWithMana.TryGetValue(entity.type, out var value)) Data = value;
-		else if (entity.CountsAsClass(DamageClass.Melee) && entity.pick == 0) Data = ChangeScaleWithManaData.Default;
+		else if (entity.CountsAsClass(DamageClass.Melee) && entity.pick == 0 && entity.ModItem == null) Data = ChangeScaleWithManaData.Default;
 
 		Enabled = Data != null;
 	}
