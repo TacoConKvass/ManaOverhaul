@@ -1,12 +1,13 @@
 using ManaOverhaul.Common;
 using System;
+using System.Collections.Generic;
 using Terraria;
 
 namespace ManaOverhaul.Components;
 
 public class ManaDrained_NPC : NPCComponent {
-	public ManaDrainData[] ManaDrainPerPlayer = null;
-	public int[] Timers = new int[Main.maxPlayers];
+	public Dictionary<int, ManaDrainData> ManaDrainPerPlayer = [];
+	public Dictionary<int, int> Timers = [];
 	public float Resistance = 0f;
 
 	public override void SetDefaults(NPC entity) {
@@ -15,27 +16,33 @@ public class ManaDrained_NPC : NPCComponent {
 
 		Enabled = Resistance < 1f;
 		if (!Enabled) return;
-
-		ManaDrainPerPlayer = new ManaDrainData[Main.maxPlayers];
-		Array.Fill(ManaDrainPerPlayer, new ManaDrainData() { Interval = 0, ManaPerInterval = 0, Ticks = 0 });
 	}
 
 	public override bool PreAI(NPC npc) {
 		if (!Enabled) return true;
 
-		foreach (Player player in Main.ActivePlayers) {
-			int ID = player.whoAmI;
-			ManaDrainData data = ManaDrainPerPlayer[ID];
+		List<int> toRemove = [];
+		foreach (int playerId in ManaDrainPerPlayer.Keys) {
+			ManaDrainData data = ManaDrainPerPlayer[playerId];
+			Player player = Main.player[playerId];
 
-			if (data.Ticks == 0) continue;
-			if (Timers[ID] > data.Interval) {
-				Timers[ID] = 0;
+			if (!player.active || player.dead || data.Ticks == 0) {
+				toRemove.Add(playerId);
+				continue;
+			}
+			if (Timers[playerId] > data.Interval) {
+				Timers[playerId] = 0;
 				data.Ticks--;
 				player.statMana = Math.Min(player.statMana + (data.ManaPerInterval /*- (int)(data.ManaPerInterval * Resistance)*/), player.statManaMax2);
 			}
 
-			Timers[ID]++;
+			Timers[playerId]++;
 		}
+
+		foreach (int playerId in toRemove) { 
+			ManaDrainPerPlayer.Remove(playerId);
+		}
+
 		return true;
 	}
 }

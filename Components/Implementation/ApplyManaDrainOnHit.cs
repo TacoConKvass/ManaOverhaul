@@ -20,9 +20,10 @@ public class ApplyManaDrainOnHit_Item : ItemComponent {
 
 	public override void OnHitNPC(Item item, Player player, NPC target, NPC.HitInfo hit, int damageDone) {
 		if (!Enabled) return;
-		Mod.Logger.Info(player.whoAmI);
-		Mod.Logger.Info(Data.Interval);
-		target.GetGlobalNPC<ManaDrained_NPC>().ManaDrainPerPlayer[player.whoAmI] = new ManaDrainData() { Interval = Data.Interval, ManaPerInterval = Data.ManaPerInterval, Ticks = Data.Ticks };
+
+		if (target.GetGlobalNPC<ManaDrained_NPC>().ManaDrainPerPlayer.TryAdd(player.whoAmI, Data.Clone())) 
+			return;
+		target.GetGlobalNPC<ManaDrained_NPC>().ManaDrainPerPlayer[player.whoAmI] = Data.Clone();
 	}
 
 	public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
@@ -49,6 +50,9 @@ public class ApplyManaDrainOnHit_Projectile : ProjectileComponent {
 
 	public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone) {
 		if (!Enabled) return;
-		target.GetGlobalNPC<ManaDrained_NPC>().ManaDrainPerPlayer[projectile.owner] = new ManaDrainData() { Interval = Data.Interval, ManaPerInterval = Data.ManaPerInterval, Ticks = Data.Ticks };
+
+		if (target.GetGlobalNPC<ManaDrained_NPC>().ManaDrainPerPlayer.TryAdd(projectile.owner, Data.Clone())) 
+			return;
+		target.GetGlobalNPC<ManaDrained_NPC>().ManaDrainPerPlayer[projectile.owner] = Data.Clone();
 	}
 }

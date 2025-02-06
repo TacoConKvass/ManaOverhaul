@@ -33,4 +33,12 @@ public class ManaDrainData() {
 		if (dictionary.TryAdd(ID, value)) return;
 		else dictionary[ID] = value;
 	}
+
+	public ManaDrainData Clone() {
+		return new ManaDrainData() { 
+			Interval = this.Interval, 
+			ManaPerInterval = this.ManaPerInterval, 
+			Ticks = this.Ticks 
+		};
+	}
 }
