@@ -1,20 +1,20 @@
-NPCs : {
-    SkeletronHead: {
-        AppliesManaDrain: {
-			Ticks: 5
-            ManaPerInterval: 4
-            Interval: 12
-        }
-        Resists: {
-            ManaDrain: 0.5
-        }
-    }
-    SkeletronHand: {
-        Resists: {
-            ManaDrain: 0.5
-        }
-    }
-}
+// NPCs : {
+//     SkeletronHead: {
+//         AppliesManaDrain: {
+// 			Ticks: 5
+//             ManaPerInterval: 4
+//             Interval: 12
+//         }
+//         Resists: {
+//             ManaDrain: 0.5
+//         }
+//     }
+//     SkeletronHand: {
+//         Resists: {
+//             ManaDrain: 0.5
+//         }
+//     }
+// }
 Items: {
 	IronBroadsword: {
 		ChangeScaleWithMana: { 
