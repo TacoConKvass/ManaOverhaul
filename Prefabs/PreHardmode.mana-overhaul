@@ -135,6 +135,34 @@ Items: {
 			ScaleBoosts: [0.25, 0.36]
 		}
 	}
+    Excalibur: {
+        AppliesManaDrain: {
+			Ticks: 12
+            ManaPerInterval: 8
+            Interval: 10
+		}
+    }
+    TrueExcalibur: {
+        AppliesManaDrain: {
+			Ticks: 15
+            ManaPerInterval: 9
+            Interval: 10
+		}
+    }
+    TrueNightsEdge: {
+        AppliesManaDrain: {
+			Ticks: 15
+            ManaPerInterval: 10
+            Interval: 10
+		}
+    }
+    TerraBlade: {
+        AppliesManaDrain: {
+			Ticks: 20
+            ManaPerInterval: 15
+            Interval: 5
+		}
+    }
 }
 Projectiles: {
     NightsEdge: {
@@ -144,4 +172,32 @@ Projectiles: {
             Interval: 10
 		}
 	}
+    Excalibur: {
+        AppliesManaDrain: {
+			Ticks: 12
+            ManaPerInterval: 8
+            Interval: 10
+		}
+    }
+    TrueExcalibur: {
+        AppliesManaDrain: {
+			Ticks: 15
+            ManaPerInterval: 9
+            Interval: 10
+		}
+    }
+    TrueNightsEdge: {
+        AppliesManaDrain: {
+			Ticks: 15
+            ManaPerInterval: 10
+            Interval: 10
+		}
+    }
+    TerraBlade2: {
+        AppliesManaDrain: {
+			Ticks: 20
+            ManaPerInterval: 15
+            Interval: 5
+		}
+    }
 }
