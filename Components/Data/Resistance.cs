@@ -15,7 +15,6 @@ public class Resistance : Dictionary<string, float> {
 
 		if (dictionary.TryAdd(ID, value)) return;
 		foreach (string key in value.Keys) {
-			if (dictionary[ID].TryAdd(key, value[key])) continue;
 			dictionary[ID][key] = value[key];
 		}
 	}

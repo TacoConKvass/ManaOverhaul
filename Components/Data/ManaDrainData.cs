@@ -29,9 +29,7 @@ public class ManaDrainData() {
 		if (typeof(T) == typeof(NPC)) dictionary = ComponentLibrary.NPC.AppliesManaDrain;
 
 		ManaDrainData value = data.ToObject<ManaDrainData>();
-
-		if (dictionary.TryAdd(ID, value)) return;
-		else dictionary[ID] = value;
+		dictionary[ID] = value;
 	}
 
 	public ManaDrainData Clone() {

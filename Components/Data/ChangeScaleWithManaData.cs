@@ -34,8 +34,6 @@ public class ChangeScaleWithManaData() {
 		if (typeof(T) == typeof(Projectile)) dictionary = ComponentLibrary.Projectile.ChangeScaleWithMana;
 
 		ChangeScaleWithManaData value = data.ToObject<ChangeScaleWithManaData>();
-
-		if (dictionary.TryAdd(ID, value)) return;
-		else dictionary[ID] = value;
+		dictionary[ID] = value;
 	}
 }
