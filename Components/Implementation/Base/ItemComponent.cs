@@ -1,5 +1,3 @@
-using ManaOverhaul.Common;
-using Terraria;
 using Terraria.ModLoader;
 
 namespace ManaOverhaul.Components;

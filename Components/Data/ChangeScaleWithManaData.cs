@@ -2,7 +2,6 @@ using ManaOverhaul.Common;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ID;
 
 namespace ManaOverhaul.Components;
 

@@ -1,5 +1,4 @@
-	using Newtonsoft.Json.Linq;
-using ManaOverhaul.Common;
+using Newtonsoft.Json.Linq;
 using ManaOverhaul.Components;
 using System.IO;
 using System.Linq;
