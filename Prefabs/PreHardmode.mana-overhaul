@@ -1,3 +1,20 @@
+NPCs : {
+    SkeletronHead: {
+        AppliesManaDrain: {
+			Ticks: 5
+            ManaPerInterval: 4
+            Interval: 12
+        }
+        Resists: {
+            ManaDrain: 0.5
+        }
+    }
+    SkeletronHand: {
+        Resists: {
+            ManaDrain: 0.5
+        }
+    }
+}
 Items: {
 	IronBroadsword: {
 		ChangeScaleWithMana: { 
@@ -36,8 +53,8 @@ Items: {
 		}
 		AppliesManaDrain: {
 			Ticks: 10
-            ManaPerInterval: 1
-            Interval: 1
+            ManaPerInterval: 5
+            Interval: 10
 		}
 	}
 	BladeofGrass: {
@@ -123,8 +140,8 @@ Projectiles: {
     NightsEdge: {
 		AppliesManaDrain: {
 			Ticks: 10
-            ManaPerInterval: 1
-            Interval: 1
+            ManaPerInterval: 5
+            Interval: 10
 		}
 	}
 }

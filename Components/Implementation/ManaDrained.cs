@@ -30,10 +30,13 @@ public class ManaDrained_NPC : NPCComponent {
 				toRemove.Add(playerId);
 				continue;
 			}
+
 			if (Timers[playerId] > data.Interval) {
 				Timers[playerId] = 0;
 				data.Ticks--;
-				player.statMana = Math.Min(player.statMana + (data.ManaPerInterval /*- (int)(data.ManaPerInterval * Resistance)*/), player.statManaMax2);
+				int manaGain = (int)(data.ManaPerInterval - data.ManaPerInterval * Resistance);
+				player.statMana = Math.Min(player.statMana + manaGain, player.statManaMax2);
+				CombatText.NewText(player.Hitbox, Microsoft.Xna.Framework.Color.Aqua, manaGain, true, true);
 			}
 
 			Timers[playerId]++;
@@ -41,8 +44,42 @@ public class ManaDrained_NPC : NPCComponent {
 
 		foreach (int playerId in toRemove) { 
 			ManaDrainPerPlayer.Remove(playerId);
+			Timers.Remove(playerId);
 		}
 
 		return true;
+	}
+
+	public void Inflict(int playerId, ManaDrainData data) {
+		ManaDrainPerPlayer[playerId] = data;
+		Timers[playerId] = 0;
+	}
+}
+
+public class ManaDrained_Player : PlayerComponent {
+	public ManaDrainData Data = default;
+	public int Timer = 0;
+
+	public override void PostUpdate() {
+		if (Data == null) return;
+
+		if (Data.Ticks <= 0 || !Player.active || Player.dead) {
+			Data = null;
+			return;
+		}
+
+		if (Timer > Data.Interval) {
+			Timer = 0;
+			Data.Ticks--;
+			Player.statMana = Math.Max(Player.statMana - Data.ManaPerInterval, 0);
+			CombatText.NewText(Player.Hitbox, Microsoft.Xna.Framework.Color.MediumAquamarine, -Data.ManaPerInterval, true);
+		}
+
+		Timer++;
+	}
+
+	public void Inflict(ManaDrainData data) {
+		Data = data;
+		Timer = 0;
 	}
 }
